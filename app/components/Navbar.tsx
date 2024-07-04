@@ -14,6 +14,9 @@ const Navbar = () => {
       </div>
 
       <NavbarLinks/>
+      <div className="flex items-center gap-x-2 ms-auto md:col-span-3">
+        
+      </div>
     </nav>
   )
 }

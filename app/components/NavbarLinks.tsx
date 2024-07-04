@@ -34,7 +34,7 @@ function NavbarLinks() {
      '>
       {navbarLinks.map((item)=>(
         <Link href={item.herf} key={item.id} className={cn(
-            location ===item.herf ? "bg-muted" : "group flex items-center px-2 py-2 font-medium rounded-md"
+            location === item.herf ? "bg-muted" :"hover:bg-muted hover:bg-opacity-75", "group flex items-center px-2 py-2 font-medium rounded-md"
         )}>
             {item.name}
         </Link>

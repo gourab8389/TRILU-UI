@@ -1,6 +1,8 @@
 import Link from 'next/link'
 import React from 'react'
 import NavbarLinks from './NavbarLinks'
+import { Button } from '@/components/ui/button'
+import MobileMenu from './MobileMenu'
 
 const Navbar = () => {
   return (
@@ -8,14 +10,19 @@ const Navbar = () => {
       <div className="md:col-span-3">
       <Link href="/">
         <h1 className='text-2xl font-semibold'>
-            TRILU <span className='text-violet-500'>UI</span>
+            TRILU <span className='text-primary'>UI</span>
         </h1>
       </Link>
       </div>
 
       <NavbarLinks/>
       <div className="flex items-center gap-x-2 ms-auto md:col-span-3">
-        
+        <Button>Login</Button>
+        <Button variant={"secondary"}>Register</Button>
+
+        <div className="md:hidden ">
+            <MobileMenu/>
+        </div>
       </div>
     </nav>
   )

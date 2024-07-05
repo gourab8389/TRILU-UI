@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button'
 import MobileMenu from './MobileMenu'
 import { LoginLink, RegisterLink } from '@kinde-oss/kinde-auth-nextjs/components'
 import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server'
+import UserNav from './UserNav'
 
 const Navbar = async () => {
     const {getUser } = getKindeServerSession()
@@ -23,7 +24,7 @@ const Navbar = async () => {
             <div className="flex items-center gap-x-2 ms-auto md:col-span-3">
 
                 {user ? (
-                    <h1>user is authenticated</h1>
+                    <UserNav email={user.email as string} name={user.given_name as string} userImg={user.picture ?? `https://avatar.vercel.sh/${user.given_name}`}/>
                 ) : (
                     <div className="flex items-center gap-x-2">
                         <Button asChild>

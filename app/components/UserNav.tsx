@@ -2,6 +2,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import { LogoutLink } from '@kinde-oss/kinde-auth-nextjs/components'
+import Link from 'next/link'
 
 interface usserDetails{
     email:string,
@@ -20,7 +21,7 @@ function UserNav({email, name, userImg}:usserDetails) {
                 </Avatar>
             </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent className='w-56' align='end' forceMount>
+        <DropdownMenuContent className='w-56 cursor-pointer' align='end' forceMount>
             <DropdownMenuLabel className='font-normal'>
                 <div className="flex flex-col space-y-1">
                     <p className='text-sm font-medium leading-none'>{name}</p>
@@ -31,18 +32,20 @@ function UserNav({email, name, userImg}:usserDetails) {
             </DropdownMenuLabel>
             <DropdownMenuSeparator/>
             <DropdownMenuGroup>
-                <DropdownMenuItem>
+                <DropdownMenuItem className='cursor-pointer' asChild>
+                    <Link href={'/sell'}>
+                    Sell your Product
+                    </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem className='cursor-pointer'>
                     test item
                 </DropdownMenuItem>
-                <DropdownMenuItem>
-                    test item
-                </DropdownMenuItem>
-                <DropdownMenuItem>
+                <DropdownMenuItem className='cursor-pointer'>
                     test item
                 </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator/>
-            <DropdownMenuItem asChild>
+            <DropdownMenuItem className='cursor-pointer' asChild>
                 <LogoutLink>
                     Log Out
                 </LogoutLink>

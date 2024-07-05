@@ -19,6 +19,8 @@ function SellRoute() {
                     Please describe your product here in details so that it can be sold
                 </CardDescription>
             </CardHeader>
+
+
             <CardContent className='flex flex-col gap-y-10'>
                 <div className="flex flex-col gap-y-2">
                     <Label>
@@ -26,27 +28,35 @@ function SellRoute() {
                     </Label>
                     <Input type='text' placeholder='Name of your Product'/>
                 </div>
+
+
                 <div className="flex flex-col gap-y-2">
                     <Label>Category</Label>
                     <SelectCategory/>
                 </div>
 
+
+
                 <div className="flex flex-col gap-y-2">
                     <Label>Price</Label>
                     <Input type='number' placeholder=' ₹ 99.00' />
                 </div>
+
+
                 <div className="flex flex-col gap-y-2">
                     <Label>Small Summary</Label>
                     <Textarea placeholder='Please describe your product shortly right here...'/>
                 </div>
 
-                <div className="flex flex-col gap-y-2
-                 ">
+
+                <div className="flex flex-col gap-y-2">
                     <Label>
                         Description
                     </Label>
                     <TipTapEditor/>
                  </div>
+
+
             </CardContent>
         </form>
     </Card>

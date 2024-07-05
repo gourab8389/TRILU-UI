@@ -66,7 +66,7 @@ export function TipTapEditor(){
         content: "<p> Hello World </p>",
         editorProps: {
             attributes:{
-                class: 'focus:outline-none min-h-[150px]'
+                class: 'focus:outline-none min-h-[150px] prose prose-sm sm:prose-base'
             }
         }
     });

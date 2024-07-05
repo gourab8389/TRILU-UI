@@ -6,6 +6,7 @@ import MobileMenu from './MobileMenu'
 import { LoginLink, RegisterLink } from '@kinde-oss/kinde-auth-nextjs/components'
 import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server'
 import UserNav from './UserNav'
+import { ModeToggle } from './ThemeProvider'
 
 const Navbar = async () => {
     const {getUser } = getKindeServerSession()
@@ -18,9 +19,11 @@ const Navbar = async () => {
                         TRILU <span className='text-primary'>UI</span>
                     </h1>
                 </Link>
+                {/* <ModeToggle/> */}
             </div>
 
             <NavbarLinks />
+           
             <div className="flex items-center gap-x-2 ms-auto md:col-span-3">
 
                 {user ? (

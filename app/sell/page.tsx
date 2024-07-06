@@ -32,7 +32,7 @@ function SellRoute() {
         }else if(state.status === 'error'){
             toast.error(state.message)
         }
-    },[])
+    },[state])
 return (
 <section className='max-w-7xl mx-auto md:px-8 mb-14'>
         <Card>
@@ -120,6 +120,7 @@ return (
                             <UploadDropzone endpoint='imageUploader' 
                             onClientUploadComplete={(res)=> {
                                 setImages(res.map((item) => item.url))
+                                toast.success("Your images havebeen uploaded")
                                 
                             }}
                             onUploadError={(error: Error)=>{

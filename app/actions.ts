@@ -36,13 +36,11 @@ export async function SellProduct(prevState: any,formData : FormData) {
     const validateFields = productSchema.safeParse({
         name: formData.get("name"),
         category: formData.get("category"),
-        price: formData.get("price"),
+        price: Number(formData.get("price")),
         smallDescription: formData.get("smallDescription"),
         description: formData.get("description"),
-        images: formData.get("images"),
+        images: JSON.parse(formData.get("images") as string),
         productFile: formData.get("productFile")
-
-
     })
 
     if(!validateFields.success){
@@ -54,4 +52,10 @@ export async function SellProduct(prevState: any,formData : FormData) {
 
         return state;
     }
+
+    const state: State = {
+        status: "success",
+        message: "Your product has been created!"
+    }
+    return state;
 }

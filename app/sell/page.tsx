@@ -2,7 +2,7 @@
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import SelectCategory from '../components/SelectCategory'
 import { Textarea } from '@/components/ui/textarea'
 import { TipTapEditor } from '../components/Editor'
@@ -11,6 +11,8 @@ import { Button } from '@/components/ui/button'
 import { JSONContent } from '@tiptap/react'
 import { useFormState } from 'react-dom'
 import { SellProduct, State } from '../actions'
+import { toast } from 'sonner'
+
 
 
 function SellRoute() {
@@ -24,7 +26,13 @@ function SellRoute() {
 
     const[productFile , setProductFile] = useState<null | string>(null);
 
-    console.log(state?.errors)
+    useEffect(()=> {
+        if(state.status === "success"){
+            toast.success(state.message)
+        }else if(state.status === 'error'){
+            toast.error(state.message)
+        }
+    },[])
 return (
 <section className='max-w-7xl mx-auto md:px-8 mb-14'>
         <Card>
@@ -52,6 +60,8 @@ return (
                         </div>
 
 
+
+
                         <div className="flex flex-col gap-y-2">
                             <Label>Category</Label>
                             <SelectCategory />
@@ -59,6 +69,7 @@ return (
                                 <p className='text-destructive'>{state?.errors?.["category"]?.[0]}</p>
                             )}
                         </div>
+
 
 
 
@@ -73,6 +84,9 @@ return (
                         </div>
 
 
+
+
+
                         <div className="flex flex-col gap-y-2">
                             <Label>Small Summary</Label>
                             <Textarea
@@ -82,6 +96,9 @@ return (
                                 <p className='text-destructive'>{state?.errors?.["smallDescription"]?.[0]}</p>
                             )}
                         </div>
+
+
+
 
 
                         <div className="flex flex-col gap-y-2">
@@ -94,6 +111,8 @@ return (
                                 <p className='text-destructive'>{state?.errors?.["description"]?.[0]}</p>
                             )}
                         </div>
+
+                        
 
                         <div className="flex flex-col gap-y-2">
                             <input type="hidden" name='images' value={JSON.stringify(images)} />
@@ -111,6 +130,8 @@ return (
                                 <p className='text-destructive'>{state?.errors?.["images"]?.[0]}</p>
                             )}
                         </div>
+
+
 
                         <div className="flex flex-col gap-y-2">
                             <input type="hidden" name='productFile' value={productFile ?? ""}/>

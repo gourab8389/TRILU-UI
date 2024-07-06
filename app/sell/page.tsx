@@ -1,14 +1,19 @@
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import React from 'react'
+import React, { useState } from 'react'
 import SelectCategory from '../components/SelectCategory'
 import { Textarea } from '@/components/ui/textarea'
 import { TipTapEditor } from '../components/Editor'
 import { UploadDropzone } from '../lib/uploadthing'
 import { Button } from '@/components/ui/button'
+import { JSONContent } from '@tiptap/react'
+import { error } from 'console'
 
 function SellRoute() {
+    const [json, setJson] = useState<null | JSONContent>(null);
+    const [images , setImages] = useState<null | string[]>(null)
+    const[productFile , setProductFile] = useState<null | string>(null)
     return (
         <section className='max-w-7xl mx-auto md:px-8 mb-14'>
             <Card>
@@ -28,7 +33,8 @@ function SellRoute() {
                             <Label>
                                 Name
                             </Label>
-                            <Input type='text' placeholder='Name of your Product' />
+                            <Input
+                            name='name' type='text' placeholder='Name of your Product' />
                         </div>
 
 
@@ -41,36 +47,56 @@ function SellRoute() {
 
                         <div className="flex flex-col gap-y-2">
                             <Label>Price</Label>
-                            <Input type='number' placeholder=' ₹ 99.00' />
+                            <Input 
+                            name='price'
+                            type='number' placeholder=' ₹ 99.00' />
                         </div>
 
 
                         <div className="flex flex-col gap-y-2">
                             <Label>Small Summary</Label>
-                            <Textarea placeholder='Please describe your product shortly right here...' />
+                            <Textarea
+                            name='smallDescription'
+                             placeholder='Please describe your product shortly right here...' />
                         </div>
 
 
                         <div className="flex flex-col gap-y-2">
+                            <input type="hidden" name='description' value={JSON.stringify(json)} />
                             <Label>
                                 Description
                             </Label>
-                            <TipTapEditor />
+                            <TipTapEditor json={json} setJson={setJson} />
                         </div>
 
                         <div className="flex flex-col gap-y-2">
+                            <input type="hidden" name='images' value={JSON.stringify(images)} />
                             <Label>Product Images</Label>
-                            <UploadDropzone endpoint='imageUploader' />
+                            <UploadDropzone endpoint='imageUploader' 
+                            onClientUploadComplete={(res)=> {
+                                setImages(res.map((item) => item.url))
+                                
+                            }}
+                            onUploadError={(error: Error)=>{
+                                throw new Error(`${error}`)    
+                            }}
+                             />
                         </div>
 
                         <div className="flex flex-col gap-y-2">
+                            <input type="hidden" name='productFile' value={productFile ?? ""}/>
                         <Label>Product File</Label>
-                        <UploadDropzone endpoint='productFileUpload'/>
+                        <UploadDropzone onClientUploadComplete={(res)=>{
+                            setProductFile(res[0].url)
+                        }}  
+                        onUploadError={(error: Error)=>{
+                            throw new Error(`${error}`)    
+                        }} endpoint='productFileUpload'/>
                         </div>
 
                     </CardContent>
                     <CardFooter className='mt-5'>
-                        <Button>Submit Button</Button>
+                        <Button>Submit</Button>
                     </CardFooter>
                 </form>
             </Card>

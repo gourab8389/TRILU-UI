@@ -19,11 +19,11 @@ const productSchema = z.object({
 
     smallDescription: z.string().min(10, {message:"Please summerize your product more"}),
     
-    description: z.string().min(1, {message:"Description has required"}),
+    description: z.string().min(10, {message:"Description has required"}),
 
     images: z.array(z.string(), {message:"Images are required"}),
 
-    productFile: z.string().min(1, {message:"Please upload a product file"})
+    productFile: z.string().min(1, {message:"Please upload zip of your product"})
 })
 
 export async function SellProduct(prevState: any,formData : FormData) {

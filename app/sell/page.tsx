@@ -24,7 +24,7 @@ function SellRoute() {
 
     const[productFile , setProductFile] = useState<null | string>(null);
 
-    console.log(state?.message)
+    console.log(state?.errors)
 return (
 <section className='max-w-7xl mx-auto md:px-8 mb-14'>
         <Card>
@@ -46,12 +46,18 @@ return (
                             </Label>
                             <Input
                             name='name' type='text' placeholder='Name of your Product' />
+                            {state?.errors?.["name"]?.[0] && (
+                                <p className='text-destructive'>{state?.errors?.["name"]?.[0]}</p>
+                            )}
                         </div>
 
 
                         <div className="flex flex-col gap-y-2">
                             <Label>Category</Label>
                             <SelectCategory />
+                            {state?.errors?.["category"]?.[0] && (
+                                <p className='text-destructive'>{state?.errors?.["category"]?.[0]}</p>
+                            )}
                         </div>
 
 
@@ -61,6 +67,9 @@ return (
                             <Input 
                             name='price'
                             type='number' placeholder=' ₹ 99.00' />
+                            {state?.errors?.["price"]?.[0] && (
+                                <p className='text-destructive'>{state?.errors?.["price"]?.[0]}</p>
+                            )}
                         </div>
 
 
@@ -69,6 +78,9 @@ return (
                             <Textarea
                             name='smallDescription'
                              placeholder='Please describe your product shortly right here...' />
+                             {state?.errors?.["smallDescription"]?.[0] && (
+                                <p className='text-destructive'>{state?.errors?.["smallDescription"]?.[0]}</p>
+                            )}
                         </div>
 
 
@@ -78,6 +90,9 @@ return (
                                 Description
                             </Label>
                             <TipTapEditor json={json} setJson={setJson} />
+                            {state?.errors?.["description"]?.[0] && (
+                                <p className='text-destructive'>{state?.errors?.["description"]?.[0]}</p>
+                            )}
                         </div>
 
                         <div className="flex flex-col gap-y-2">
@@ -92,6 +107,9 @@ return (
                                 throw new Error(`${error}`)    
                             }}
                              />
+                             {state?.errors?.["images"]?.[0] && (
+                                <p className='text-destructive'>{state?.errors?.["images"]?.[0]}</p>
+                            )}
                         </div>
 
                         <div className="flex flex-col gap-y-2">
@@ -103,6 +121,9 @@ return (
                         onUploadError={(error: Error)=>{
                             throw new Error(`${error}`)    
                         }} endpoint='productFileUpload'/>
+                        {state?.errors?.["productFile"]?.[0] && (
+                                <p className='text-destructive'>{state?.errors?.["productFile"]?.[0]}</p>
+                            )}
                         </div>
 
                 </CardContent>

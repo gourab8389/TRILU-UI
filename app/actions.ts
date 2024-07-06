@@ -1,6 +1,14 @@
-"use client"
+"use server"
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server"
 import {z} from "zod"
+
+export type State ={
+    status: "error" | "success" | undefined;
+    errors?: {
+        [key: string]: string[];
+    }
+    message?: string | null;
+}
 
 const productSchema = z.object({
     name: z.string().min(3, {message: "The name has to be a min character length of 5"}),
@@ -18,7 +26,7 @@ const productSchema = z.object({
     productFile: z.string().min(1, {message:"Please upload a product file"})
 })
 
-export async function SellProduct(formData : FormData) {
+export async function SellProduct(prevState: any,formData : FormData) {
     const {getUser} = getKindeServerSession();
     const user = await getUser();
     if(!user){
@@ -36,4 +44,14 @@ export async function SellProduct(formData : FormData) {
 
 
     })
+
+    if(!validateFields.success){
+        const state: State = {
+            status: 'error',
+            errors: validateFields.error.flatten().fieldErrors,
+            message: 'Oops, i think there is a mistake with your inputs'
+        }
+
+        return state;
+    }
 }

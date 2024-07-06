@@ -1,3 +1,4 @@
+"use client"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -8,27 +9,37 @@ import { TipTapEditor } from '../components/Editor'
 import { UploadDropzone } from '../lib/uploadthing'
 import { Button } from '@/components/ui/button'
 import { JSONContent } from '@tiptap/react'
-import { error } from 'console'
+import { useFormState } from 'react-dom'
+import { SellProduct, State } from '../actions'
+
 
 function SellRoute() {
+    const initialState: State = {message:"", status: undefined}
+
+    const [state, formAction] = useFormState(SellProduct, initialState);
+
     const [json, setJson] = useState<null | JSONContent>(null);
-    const [images , setImages] = useState<null | string[]>(null)
-    const[productFile , setProductFile] = useState<null | string>(null)
-    return (
-        <section className='max-w-7xl mx-auto md:px-8 mb-14'>
-            <Card>
-                <form >
-                    <CardHeader>
+
+    const [images , setImages] = useState<null | string[]>(null);
+
+    const[productFile , setProductFile] = useState<null | string>(null);
+
+    console.log(state?.message)
+return (
+<section className='max-w-7xl mx-auto md:px-8 mb-14'>
+        <Card>
+            <form action={formAction} >
+                <CardHeader>
                         <CardTitle>
                             Sell your product with ease
                         </CardTitle>
                         <CardDescription>
                             Please describe your product here in details so that it can be sold
                         </CardDescription>
-                    </CardHeader>
+                </CardHeader>
 
 
-                    <CardContent className='flex flex-col gap-y-10'>
+                <CardContent className='flex flex-col gap-y-10'>
                         <div className="flex flex-col gap-y-2">
                             <Label>
                                 Name
@@ -94,14 +105,14 @@ function SellRoute() {
                         }} endpoint='productFileUpload'/>
                         </div>
 
-                    </CardContent>
-                    <CardFooter className='mt-5'>
-                        <Button>Submit</Button>
-                    </CardFooter>
-                </form>
-            </Card>
-        </section>
-    )
+                </CardContent>
+                <CardFooter className='mt-5'>
+                        <Button type='submit'>Submit</Button>
+                </CardFooter>
+            </form>
+        </Card>
+</section>
+)
 }
 
 export default SellRoute

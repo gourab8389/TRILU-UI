@@ -60,7 +60,7 @@ export function SettingsForm({ email, firstName, lastName }: iAppProps) {
             name="email"
             type="email"
             disabled
-            defaultValue={"jan@alenix.de"}
+            defaultValue={"nepo@gmail.com"}
           />
         </div>
       </CardContent>

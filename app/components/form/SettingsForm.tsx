@@ -14,8 +14,8 @@ import { useFormState } from "react-dom";
 
 import { useEffect } from "react";
 import { toast } from "sonner";
+import { type State, UpdateUserSettings } from "@/app/actions";
 import SubmitButton from "../SubmitButton";
-
 
 
 interface iAppProps {
@@ -25,11 +25,18 @@ interface iAppProps {
 }
 
 export function SettingsForm({ email, firstName, lastName }: iAppProps) {
+  const initalState: State = { message: "", status: undefined };
+  const [state, formAction] = useFormState(UpdateUserSettings, initalState);
 
-
-
+  useEffect(() => {
+    if (state?.status === "error") {
+      toast.error(state.message);
+    } else if (state?.status === "success") {
+      toast.success(state.message);
+    }
+  }, [state]);
   return (
-    <form >
+    <form action={formAction}>
       <CardHeader>
         <CardTitle>Settings</CardTitle>
         <CardDescription>
@@ -53,7 +60,7 @@ export function SettingsForm({ email, firstName, lastName }: iAppProps) {
             name="email"
             type="email"
             disabled
-            defaultValue={"nepo@gmail.com"}
+            defaultValue={"jan@alenix.de"}
           />
         </div>
       </CardContent>

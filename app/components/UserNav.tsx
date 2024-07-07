@@ -32,18 +32,19 @@ function UserNav({email, name, userImg}:usserDetails) {
             </DropdownMenuLabel>
             <DropdownMenuSeparator/>
             <DropdownMenuGroup>
-                <DropdownMenuItem className='cursor-pointer' asChild>
-                    <Link href={'/sell'}>
-                    Sell your Product
-                    </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem className='cursor-pointer'>
-                    test item
-                </DropdownMenuItem>
-                <DropdownMenuItem className='cursor-pointer'>
-                    test item
-                </DropdownMenuItem>
-            </DropdownMenuGroup>
+          <DropdownMenuItem asChild>
+            <Link href="/sell">Sell your Product</Link>
+          </DropdownMenuItem>
+          <DropdownMenuItem asChild>
+            <Link href="/settings">Settings</Link>
+          </DropdownMenuItem>
+          <DropdownMenuItem asChild>
+            <Link href="my-products">My Products</Link>
+          </DropdownMenuItem>
+          <DropdownMenuItem asChild>
+            <Link href="/billing">Billing</Link>
+          </DropdownMenuItem>
+        </DropdownMenuGroup>
             <DropdownMenuSeparator/>
             <DropdownMenuItem className='cursor-pointer' asChild>
                 <LogoutLink>

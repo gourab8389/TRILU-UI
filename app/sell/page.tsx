@@ -13,6 +13,8 @@ import { useFormState } from 'react-dom';
 import { SellProduct, State } from '../actions';
 import { toast } from 'sonner';
 import SubmitButton from '../components/SubmitButton';
+import { redirect } from 'next/navigation';
+
 
 function SellRoute() {
     const initialState: State = { message: "", status: undefined };
@@ -25,6 +27,7 @@ function SellRoute() {
     useEffect(() => {
         if (state.status === "success") {
             toast.success(state.message);
+            redirect("/")
         } else if (state.status === "error") {
             toast.error(state.message);
         }

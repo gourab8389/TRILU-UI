@@ -4,13 +4,21 @@ import { Loader2 } from 'lucide-react'
 import React from 'react'
 import { useFormStatus } from 'react-dom'
 
-function SubmitButton() {
+function SubmitButton({title}:{ title: string }) {
     const {pending} = useFormStatus()
   return (
-   <>
-   {pending ? <Button disabled><Loader2 className='mr-2 h-4 w-4 animate-spin'/>Please Wait</Button> : <Button type='submit'>Create your Product</Button>}
-   </>
-  )
+    <>
+    {pending ? (
+      <Button disabled>
+        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+        Please Wait
+      </Button>
+    ) : (
+      <Button type="submit">{title}</Button>
+    )}
+  </>
+);
+  
 }
 
 export default SubmitButton

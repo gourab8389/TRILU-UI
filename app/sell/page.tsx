@@ -50,7 +50,7 @@ function SellRoute() {
                                 Name
                             </Label>
                             <Input
-                                name='name' type='text' placeholder='Name of your Product' />
+                                name='name' type='text' placeholder='Name of your Product' required minLength={3}/>
                             {state?.errors?.["name"]?.[0] && (
                                 <p className='text-destructive'>{state?.errors?.["name"]?.[0]}</p>
                             )}
@@ -74,7 +74,7 @@ function SellRoute() {
                             <Label>Price</Label>
                             <Input
                                 name='price'
-                                type='number' placeholder=' ₹ 99.00' />
+                                type='number' placeholder=' ₹ 99.00' required minLength={1}/>
                             {state?.errors?.["price"]?.[0] && (
                                 <p className='text-destructive'>{state?.errors?.["price"]?.[0]}</p>
                             )}
@@ -88,7 +88,7 @@ function SellRoute() {
                             <Label>Small Summary</Label>
                             <Textarea
                                 name='smallDescription'
-                                placeholder='Please describe your product shortly right here...' />
+                                placeholder='Please describe your product shortly right here...' required  minLength={10}/>
                             {state?.errors?.["smallDescription"]?.[0] && (
                                 <p className='text-destructive'>{state?.errors?.["smallDescription"]?.[0]}</p>
                             )}
@@ -99,7 +99,7 @@ function SellRoute() {
 
 
                         <div className="flex flex-col gap-y-2">
-                            <input type="hidden" name='description' value={JSON.stringify(json)} />
+                            <input type="hidden" name='description' value={JSON.stringify(json)} required minLength={10} />
                             <Label>
                                 Description
                             </Label>

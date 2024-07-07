@@ -12,6 +12,7 @@ import { JSONContent } from '@tiptap/react';
 import { useFormState } from 'react-dom';
 import { SellProduct, State } from '../actions';
 import { toast } from 'sonner';
+import SubmitButton from '../components/SubmitButton';
 
 function SellRoute() {
     const initialState: State = { message: "", status: undefined };
@@ -152,7 +153,7 @@ function SellRoute() {
 
                     </CardContent>
                     <CardFooter className='mt-5'>
-                        <Button type='submit'>Submit</Button>
+                        <SubmitButton/>
                     </CardFooter>
                 </form>
             </Card>
